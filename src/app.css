@@ -28,11 +28,7 @@ body {
     text-align: center;
     margin-top: 20px;
 }
-.playerName h1 {
-    font-size: 3rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
+
 
 .resourceContainer {
     background-color: var(--cinereous);
