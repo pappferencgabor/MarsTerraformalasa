@@ -1,7 +1,9 @@
 export type resourceProps = {
     name: string;
     amount: number;
+    production: number;
     onChange: (increment: number) => void;
+    productionchange: (increment: number) => void;
 }
 
 const Resource = (props: resourceProps) => {
@@ -12,6 +14,15 @@ const Resource = (props: resourceProps) => {
             <div className="buttonContainer">
                 <button type="button" onClick={() => props.onChange(-1)}>-</button>
                 <button type="button" onClick={() => props.onChange(+1)}>+</button>
+            </div>
+
+            <div className="productionContainer">
+                <p>Termelés: <span>{props.production}</span></p>
+
+                <div className="buttonContainer">
+                    <button type="button" onClick={() => props.productionchange(-1)}>-</button>
+                    <button type="button" onClick={() => props.productionchange(+1)}>+</button>
+                </div>
             </div>
         </div>
     )

@@ -40,8 +40,12 @@ body {
     font-size: 2rem;
     margin-bottom: 10px;
 }
-.resourceContainer span {
+.resourceContainer span{
     font-weight: 700;
+}
+
+.productionContainer {
+    margin-top: 5px;
 }
 
 .buttonContainer {
