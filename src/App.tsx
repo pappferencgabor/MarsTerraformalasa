@@ -1,18 +1,28 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useEffect } from "react"
 import "./app.css"
 import PlayerName from "./components/PlayerName/PlayerName"
 import Resource from "./components/Resource/Resource"
 import { resourceProps } from "./components/Resource/Resource"
 
 function App() {
-	const [Megacredit, SetMegacredit] = useState<number>(0)
-	const [Acel, SetAcel] = useState<number>(0)
-	const [Titan, SetTitan] = useState<number>(0)
-	const [Palantak, SetPalantak] = useState<number>(0)
-	const [Energia, SetEnergia] = useState<number>(0)
-	const [Ho, SetHo] = useState<number>(0)
+	const loadResourceCount = ( resource:string ):number => {
+		const savedMegacredit = localStorage.getItem(resource);
+		return savedMegacredit ? Number(savedMegacredit) : 0;
+	}
 
-	const [Megacreditproduction, SetMegacreditproduction] = useState<number>(0)
+	const loadResourceProdCount = ( resource:string ):number => {
+		const savedMegacredit = localStorage.getItem(`${resource}prod`);
+		return savedMegacredit ? Number(savedMegacredit) : 0;
+	}
+
+	const [Megacredit, SetMegacredit] = useState<number>(loadResourceCount("Megacredit"))
+	const [Acel, SetAcel] = useState<number>(loadResourceCount("Acel"))
+	const [Titan, SetTitan] = useState<number>(loadResourceCount("Titan"))
+	const [Palantak, SetPalantak] = useState<number>(loadResourceCount("Palantak"))
+	const [Energia, SetEnergia] = useState<number>(loadResourceCount("Energia"))
+	const [Ho, SetHo] = useState<number>(loadResourceCount("Ho"))
+
+	const [Megacreditproduction, SetMegacreditproduction] = useState<number>(loadResourceProdCount("Megacredit"))
 	const [Acelproduction, SetAcelproduction] = useState<number>(0)
 	const [Titanproduction, SetTitanproduction] = useState<number>(0)
 	const [Palantakproduction, SetPalantakproduction] = useState<number>(0)
@@ -90,6 +100,14 @@ function App() {
 		e.preventDefault()
 		SetMegacredit(Megacredit + Megacreditproduction)
 	}
+
+	useEffect(() => {
+		localStorage.setItem("Megacredit", Megacredit.toString())
+	}, [Megacredit])
+
+	useEffect(() => {
+		localStorage.setItem("Megacreditprod", Megacreditproduction.toString())
+	}, [Megacreditproduction])
 
 	return (
 		<form action="" onSubmit={handleSubmit}>
